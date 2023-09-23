@@ -5,7 +5,7 @@ Integrantes:
 
 Morales, Joaquin (joacomora2014@gmail.com)
 
-Sarasola Nicolas ()
+Sarasola Nicolas (nicolassarasoladiaz@gmail.com)
 
 Tema del Trabajo Práctico: Sistema de Gestión de Música y Artistas
 
