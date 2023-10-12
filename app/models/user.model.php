@@ -10,8 +10,11 @@ class UserModel {
     public function getByUsername($username) {
         $query = $this->db->prepare('SELECT * FROM sesion WHERE username = ?');
         $query->execute([$username]);
-    
-        return $query->fetch(PDO::FETCH_OBJ);
+        $result = $query->fetch(PDO::FETCH_OBJ);
+        
+
+        
+        return $result;
     }
     
 }

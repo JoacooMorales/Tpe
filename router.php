@@ -10,10 +10,10 @@ if (!empty( $_GET['action'])) {
     $action = $_GET['action'];
 }
 
-// listar    ->         taskController->showTasks();
-// agregar   ->         taskController->addTask();
-// eliminar/:ID  ->     taskController->removeTask($id); 
-// finalizar/:ID  ->    taskController->finishTask($id);
+// listar    ->         taskController->showCanciones();
+// agregar   ->         taskController->addCanciones();
+// eliminar/:ID  ->     taskController->removeCanciones($id); 
+// finalizar/:ID  ->    taskController->finishCanciones($id);
 // about ->             aboutController->showAbout();
 // login ->             authContoller->showLogin();
 // logout ->            authContoller->logout();
@@ -25,19 +25,19 @@ $params = explode('/', $action);
 switch ($params[0]) {
     case 'listar':
         $controller = new TaskController();
-        $controller->showTasks();
+        $controller->showCanciones();
         break;
     case 'agregar':
         $controller = new TaskController();
-        $controller->addTask();
+        $controller->addCanciones();
         break;
     case 'eliminar':
         $controller = new TaskController();
-        $controller->removeTask($params[1]);
+        $controller->removeCanciones($params[1]);
         break;
     case 'finalizar':
         $controller = new TaskController();
-        $controller->finishTask($params[1]);
+        $controller->finishCanciones($params[1]);
         break;
     case 'about':
         $controller = new AboutController();

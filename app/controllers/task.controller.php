@@ -9,34 +9,33 @@ class TaskController {
 
     public function __construct() {
         // verifico logueado
-        AuthHelper::verify();
 
         $this->model = new TaskModel();
         $this->view = new TaskView();
     }
 
-    public function showTasks() {
+    public function showCanciones() {
         // obtengo tareas del controlador
-        $tasks = $this->model->getTasks();
+        $canciones = $this->model->getCanciones();
         
         // muestro las tareas desde la vista
-        $this->view->showTasks($tasks);
+        $this->view->showCanciones($canciones);
     }
 
-    public function addTask() {
+    public function addCanciones() {
 
         // obtengo los datos del usuario
-        $title = $_POST['title'];
-        $description = $_POST['description'];
-        $priority = $_POST['priority'];
+        $titulo = $_POST['titulo'];
+        $duracion = $_POST['Duración'];
+        $albumID = $_POST['albumID'];
 
         // validaciones
-        if (empty($title) || empty($priority)) {
+        if (empty($titulo) || empty($duracion)) {
             $this->view->showError("Debe completar todos los campos");
             return;
         }
 
-        $id = $this->model->insertTask($title, $description, $priority);
+        $id = $this->model->insertCanciones($titulo, $duracion, $albumID);
         if ($id) {
             header('Location: ' . BASE_URL);
         } else {
@@ -44,13 +43,13 @@ class TaskController {
         }
     }
 
-    function removeTask($id) {
-        $this->model->deleteTask($id);
+    function removeCanciones($id) {
+        $this->model->deleteCanciones($id);
         header('Location: ' . BASE_URL);
     }
     
-    function finishTask($id) {
-        $this->model->updateTask($id);
+    function finishCanciones($id) {
+        $this->model->updateCanciones($id);
         header('Location: ' . BASE_URL);
     }
 

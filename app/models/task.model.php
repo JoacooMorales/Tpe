@@ -4,40 +4,40 @@ class TaskModel {
     private $db;
 
     function __construct() {
-        $this->db = new PDO('mysql:host=localhost;dbname=db_tareas;charset=utf8', 'root', '');
+        $this->db = new PDO('mysql:host=localhost;dbname=tpeweb2musica;charset=utf8', 'root', '');
     }
 
     /**
      * Obtiene y devuelve de la base de datos todas las tareas.
      */
-    function getTasks() {
-        $query = $this->db->prepare('SELECT * FROM tareas');
+    function getCanciones() {
+        $query = $this->db->prepare('SELECT * FROM canciones');
         $query->execute();
 
-        // $tasks es un arreglo de tareas
-        $tasks = $query->fetchAll(PDO::FETCH_OBJ);
+        // $canciones es un arreglo de canciones
+        $canciones = $query->fetchAll(PDO::FETCH_OBJ);
 
-        return $tasks;
+        return $canciones;
     }
 
     /**
      * Inserta la tarea en la base de datos
      */
-    function insertTask($title, $description, $priority) {
-        $query = $this->db->prepare('INSERT INTO tareas (titulo, descripcion, prioridad) VALUES(?,?,?)');
-        $query->execute([$title, $description, $priority]);
+    function insertCanciones($titulo, $duracion, $albumID) {
+        $query = $this->db->prepare('INSERT INTO canciones (titulo, duracion, albumID) VALUES(?,?,?)');
+        $query->execute([$titulo, $duracion, $albumID]);
 
         return $this->db->lastInsertId();
     }
 
     
-function deleteTask($id) {
-    $query = $this->db->prepare('DELETE FROM tareas WHERE id = ?');
+function deleteCanciones($id) {
+    $query = $this->db->prepare('DELETE FROM canciones WHERE id = ?');
     $query->execute([$id]);
 }
 
-function updateTask($id) {    
-    $query = $this->db->prepare('UPDATE tareas SET finalizada = 1 WHERE id = ?');
+function updateCanciones($id) {    
+    $query = $this->db->prepare('UPDATE canciones SET canciones = 1 WHERE id = ?');
     $query->execute([$id]);
 }
 }
