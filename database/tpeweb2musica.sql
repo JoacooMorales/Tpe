@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-10-2023 a las 22:01:10
+-- Tiempo de generación: 13-10-2023 a las 01:11:10
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 7.3.27
 
@@ -34,6 +34,13 @@ CREATE TABLE `artistas` (
   `Género Musical` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `artistas`
+--
+
+INSERT INTO `artistas` (`ID`, `Nombre del Artista`, `País de Origen`, `Género Musical`) VALUES
+(0, 'fire', 'EEUU', 'pop');
+
 -- --------------------------------------------------------
 
 --
@@ -42,10 +49,17 @@ CREATE TABLE `artistas` (
 
 CREATE TABLE `canciones` (
   `ID` int(11) NOT NULL,
-  `Título de la Canción` varchar(255) NOT NULL,
+  `cancion` varchar(255) NOT NULL,
   `Duración` time NOT NULL,
-  `Álbum ID` int(11) NOT NULL
+  `albumID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `canciones`
+--
+
+INSERT INTO `canciones` (`ID`, `cancion`, `Duración`, `albumID`) VALUES
+(0, 'Boogie', '02:30:00', 0);
 
 -- --------------------------------------------------------
 
@@ -56,7 +70,7 @@ CREATE TABLE `canciones` (
 CREATE TABLE `sesion` (
   `ID` int(40) NOT NULL,
   `username` varchar(40) NOT NULL,
-  `password` varchar(40) NOT NULL COMMENT 'No deberia verse ',
+  `password` varchar(256) NOT NULL COMMENT 'No deberia verse ',
   `Tipo` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -65,8 +79,8 @@ CREATE TABLE `sesion` (
 --
 
 INSERT INTO `sesion` (`ID`, `username`, `password`, `Tipo`) VALUES
-(0, 'joaquin', 'morales', 'usuario'),
-(1, 'webadmin', 'admin', 'admin');
+(0, 'webadmin', '$2y$10$8EUbcp4L7og8xoeFMJ3xpuGTGni6su.pyAw3eoAdmO9VG7aH/44m.', 'admin'),
+(1, 'webusuario', '$2y$10$8EUbcp4L7og8xoeFMJ3xpuGTGni6su.pyAw3eoAdmO9VG7aH/44m.', 'usuario');
 
 -- --------------------------------------------------------
 
@@ -82,6 +96,13 @@ CREATE TABLE `álbumes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Volcado de datos para la tabla `álbumes`
+--
+
+INSERT INTO `álbumes` (`ID`, `Título del Álbum`, `Año de Lanzamiento`, `Artista ID`) VALUES
+(0, 'earth wind fire', 1990, 0);
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -95,7 +116,7 @@ ALTER TABLE `artistas`
 -- Indices de la tabla `canciones`
 --
 ALTER TABLE `canciones`
-  ADD KEY `FK_ID_AlbumesID` (`Álbum ID`);
+  ADD KEY `FK_ID_AlbumesID` (`albumID`);
 
 --
 -- Indices de la tabla `sesion`
@@ -119,7 +140,7 @@ ALTER TABLE `álbumes`
 -- Filtros para la tabla `canciones`
 --
 ALTER TABLE `canciones`
-  ADD CONSTRAINT `FK_ID_AlbumesID` FOREIGN KEY (`Álbum ID`) REFERENCES `álbumes` (`ID`);
+  ADD CONSTRAINT `FK_ID_AlbumesID` FOREIGN KEY (`albumID`) REFERENCES `álbumes` (`ID`);
 
 --
 -- Filtros para la tabla `álbumes`
