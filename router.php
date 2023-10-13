@@ -39,10 +39,36 @@ switch ($params[0]) {
         $controller = new TaskController();
         $controller->finishCanciones($params[1]);
         break;
+
+
+
     case 'about':
         $controller = new AboutController();
-        $controller->showAbout();
+        $controller->showAlbumes();
         break;
+
+        
+        
+    case 'listarAlbum':
+        $controller = new AboutController();
+        $controller->showAlbumes();
+        break;
+    case 'agregarAlbum':
+        $controller = new AboutController();
+        $controller->addAlbumes();
+        break;
+    case 'eliminarAlbum':
+        $controller = new AboutController();
+        $controller->removeAlbumes($params[1]);
+        break;
+    case 'finalizarAlbum':
+        $controller = new AboutController();
+        $controller->finishAlbumes($params[1]);
+        break;
+
+
+
+
     case 'login':
         $controller = new AuthController();
         $controller->showLogin(); 
