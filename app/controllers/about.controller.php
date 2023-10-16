@@ -10,46 +10,45 @@ class AboutController {
     public function __construct() {
         //AuthHelper::verify();
         $this->view = new AboutView();
-        $this->model = new albumesModel();
+        $this->model = new AlbumesModel();
     } 
 
     public function showAlbumes() {
-        // obtengo tareas del controlador
+        // Obtén los albumes desde el modelo
         $albumes = $this->model->getAlbumes();
         
-        // muestro las tareas desde la vista
+        // Muestra los albumes desde la vista
         $this->view->showAlbumes($albumes);
     }
 
-    public function addAlbumes() {
+    public function addAlbum() {
 
-        // obtengo los datos del usuario
-        $tituloAlbum = $_POST['Título del Álbum'];
-        $añoLanzamiento = $_POST['Año de Lanzamiento'];
-        $artistaID = $_POST['Artista ID'];
+        // Obtén los datos del formulario
+        $tituloAlbum = $_POST['tituloAlbum'];
+        $añoLanzamiento = $_POST['añoLanzamiento'];
+        $artistaID = $_POST['artistaID'];
 
-        // validaciones
+        // Validaciones
         if (empty($tituloAlbum) || empty($añoLanzamiento)) {
             $this->view->showError("Debe completar todos los campos");
             return;
         }
 
-        $id = $this->model->insertAlbumes($tituloAlbum, $añoLanzamiento, $artistaID);
+        $id = $this->model->insertAlbum($tituloAlbum, $añoLanzamiento, $artistaID);
         if ($id) {
             header('Location: ' . BASE_URL);
         } else {
-            $this->view->showError("Error al insertar la tarea");
+            $this->view->showError("Error al insertar el álbum");
         }
     }
 
-    function removeAlbumes($id) {
-        $this->model->deleteAlbumes($id);
+    public function removeAlbum($id) {
+        $this->model->deleteAlbum($id);
         header('Location: ' . BASE_URL);
     }
     
-    function finishAlbumes($id) {
-        $this->model->updateAlbumes($id);
+    public function finishAlbum($id) {
+        $this->model->updateAlbum($id);
         header('Location: ' . BASE_URL);
     }
-
 }

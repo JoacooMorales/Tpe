@@ -24,7 +24,7 @@ class TaskModel {
      * Inserta la tarea en la base de datos
      */
     function insertCanciones($titulo, $duracion, $albumID) {
-        $query = $this->db->prepare('INSERT INTO canciones (titulo, duracion, albumID) VALUES(?,?,?)');
+        $query = $this->db->prepare('INSERT INTO canciones (titulo, Duración, albumID) VALUES(?,?,?)');
         $query->execute([$titulo, $duracion, $albumID]);
 
         return $this->db->lastInsertId();

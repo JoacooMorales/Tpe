@@ -10,7 +10,7 @@ class AlbumesModel {
      * Obtiene y devuelve de la base de datos todas las tareas.
      */
     function getAlbumes() {
-        $query = $this->db->prepare('SELECT * FROM álbumes');
+        $query = $this->db->prepare('SELECT * FROM albumes');
         $query->execute();
 
         // $Albumes es un arreglo de Albumes
@@ -23,7 +23,7 @@ class AlbumesModel {
      * Inserta la tarea en la base de datos
      */
     function insertAlbumes($tituloAlbum, $añoLanzamiento, $artistaID) {
-        $query = $this->db->prepare('INSERT INTO álbumes (Título del Álbum , Año de Lanzamiento, Artista ID) VALUES(?,?,?)');
+        $query = $this->db->prepare('INSERT INTO albumes (Título del Álbum , Año de Lanzamiento, Artista ID) VALUES(?,?,?)');
         $query->execute([$tituloAlbum, $añoLanzamiento, $artistaID]);
 
         return $this->db->lastInsertId();
@@ -31,12 +31,12 @@ class AlbumesModel {
 
     
 function deleteAlbumes($id) {
-    $query = $this->db->prepare('DELETE FROM álbumes WHERE id = ?');
+    $query = $this->db->prepare('DELETE FROM albumes WHERE id = ?');
     $query->execute([$id]);
 }
 
 function updateAlbumes($id) {    
-    $query = $this->db->prepare('UPDATE álbumes SET álbumes = 1 WHERE id = ?');
+    $query = $this->db->prepare('UPDATE albumes SET albumes = 1 WHERE id = ?');
     $query->execute([$id]);
 }
 }

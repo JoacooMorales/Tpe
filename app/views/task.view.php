@@ -7,7 +7,7 @@ class TaskView {
         // NOTA: el template va a poder acceder a todas las variables y constantes que tienen alcance en esta funcion
 
         // mostrar el template
-        require 'templates/taskList.phtml';
+        require 'templates/lista_canciones.phtml';
     }
 
     public function showError($error) {
