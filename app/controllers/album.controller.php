@@ -16,7 +16,6 @@ class AlbumController {
     public function showAlbum() {
         // Obtén los albumes desde el modelo
         $albumes = $this->model->getAlbum();
-        
         // Muestra los albumes desde la vista
         $this->view->showAlbum($albumes);
     }

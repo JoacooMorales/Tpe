@@ -2,14 +2,16 @@
 require_once './app/models/cancion.model.php';
 require_once './app/views/cancion.view.php';
 require_once './app/helpers/auth.helper.php';
+require_once './app/models/album.model.php';
 
 class CancionController {
     private $model;
     private $view;
+    private $albumModel;
 
     public function __construct() {
         // verifico logueado
-
+        $this->albumModel = new AlbumesModel();
         $this->model = new CancionModel();
         $this->view = new CancionView();
     }
@@ -54,9 +56,15 @@ class CancionController {
         header('Location: ' . BASE_URL);
     }
     
-    function editarCanciones($id) {
-        $this->model->updateCanciones($id);
-        header('Location: ' . BASE_URL);
+    function editarCanciones() {
+        $canciones = $this->model->getCanciones();
+        $albumes = $this->albumModel->getAlbum();
+        $this->view->showPantallaEditora($canciones, $albumes);
+        
+
+
+        
+        //header('Location: ' . BASE_URL);
     }
 
 }

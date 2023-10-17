@@ -38,7 +38,7 @@
             $controller = new CancionController();
             $controller->removeCanciones($params[1]);
             break;
-        case 'editar':
+        case 'editarCanciones':
             $controller = new CancionController();
             $controller->editarCanciones($params[1]);
             break;

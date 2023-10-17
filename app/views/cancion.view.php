@@ -13,4 +13,9 @@ class CancionView {
     public function showError($error) {
         require 'templates/error.phtml';
     }
+
+    public function showPantallaEditora($canciones, $albumes){
+        
+        require 'templates/editar_canciones.phtml';
+    }
 }
