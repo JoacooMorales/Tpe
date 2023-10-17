@@ -10,21 +10,22 @@
 
         <div class="col-3">
             <div class="form-group">
-                <label>albumID al que pertenece</label>
+                <label>album al que pertenece</label>
                 <select required name="albumID" class="form-control">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
+    <?php foreach ($canciones as $cancion): ?>
+        <option value="<?= $cancion->albumID ?>"><?= $cancion->tituloAlbum ?></option>
+    <?php endforeach ?>
+</select>
+
+
+
             </div>
         </div>
     </div>
 
     <div class="form-group">    
         <label>Duracion de la cancion</label>
-        <textarea name="Duración" class="form-control" rows="3"  ></textarea>
+        <textarea name="Duración" class="form-control" rows="1"  ></textarea>
     </div>
 
     <button type="submit" class="btn btn-primary mt-2">Guardar</button>

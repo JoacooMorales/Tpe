@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-10-2023 a las 09:43:48
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Tiempo de generación: 17-10-2023 a las 05:44:41
+-- Versión del servidor: 10.4.18-MariaDB
+-- Versión de PHP: 7.3.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,16 +30,17 @@ SET time_zone = "+00:00";
 CREATE TABLE `albumes` (
   `ID` int(11) NOT NULL,
   `tituloAlbum` varchar(255) NOT NULL,
-  `añoLanzamiento` int(11) NOT NULL,
-  `Artista ID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `anioLanzamiento` int(4) NOT NULL,
+  `artistaID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `albumes`
 --
 
-INSERT INTO `albumes` (`ID`, `tituloAlbum`, `añoLanzamiento`, `Artista ID`) VALUES
-(1, 'pipo arg', 2021, 1);
+INSERT INTO `albumes` (`ID`, `tituloAlbum`, `anioLanzamiento`, `artistaID`) VALUES
+(1, 'pipo arg', 2021, 1),
+(3, 'pipo ALEMANIA', 2023, 1);
 
 -- --------------------------------------------------------
 
@@ -52,14 +53,15 @@ CREATE TABLE `artistas` (
   `Nombre del Artista` varchar(255) NOT NULL,
   `País de Origen` varchar(255) NOT NULL,
   `Género Musical` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `artistas`
 --
 
 INSERT INTO `artistas` (`ID`, `Nombre del Artista`, `País de Origen`, `Género Musical`) VALUES
-(1, 'pepe', 'argentina', 'pop');
+(1, 'pepe', 'argentina', 'pop'),
+(2, 'COCO', 'uruguay', 'trap');
 
 -- --------------------------------------------------------
 
@@ -72,14 +74,15 @@ CREATE TABLE `canciones` (
   `titulo` varchar(255) NOT NULL,
   `Duración` time NOT NULL,
   `albumID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `canciones`
 --
 
 INSERT INTO `canciones` (`ID`, `titulo`, `Duración`, `albumID`) VALUES
-(3, 'asdas', '00:02:22', 1);
+(4, 'holaa', '03:33:00', 3),
+(6, 'duko', '00:02:30', 1);
 
 -- --------------------------------------------------------
 
@@ -92,7 +95,7 @@ CREATE TABLE `sesion` (
   `username` varchar(40) NOT NULL,
   `password` varchar(256) NOT NULL COMMENT 'No deberia verse ',
   `Tipo` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `sesion`
@@ -111,7 +114,7 @@ INSERT INTO `sesion` (`ID`, `username`, `password`, `Tipo`) VALUES
 --
 ALTER TABLE `albumes`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `fk_artista` (`Artista ID`);
+  ADD KEY `FK_ArtistaID` (`artistaID`);
 
 --
 -- Indices de la tabla `artistas`
@@ -141,19 +144,19 @@ ALTER TABLE `sesion`
 -- AUTO_INCREMENT de la tabla `albumes`
 --
 ALTER TABLE `albumes`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `artistas`
 --
 ALTER TABLE `artistas`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `canciones`
 --
 ALTER TABLE `canciones`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
@@ -163,8 +166,7 @@ ALTER TABLE `canciones`
 -- Filtros para la tabla `albumes`
 --
 ALTER TABLE `albumes`
-  ADD CONSTRAINT `FK_ArtistaID` FOREIGN KEY (`Artista ID`) REFERENCES `artistas` (`ID`),
-  ADD CONSTRAINT `fk_artista` FOREIGN KEY (`Artista ID`) REFERENCES `artistas` (`ID`);
+  ADD CONSTRAINT `FK_ArtistaID` FOREIGN KEY (`artistaID`) REFERENCES `artistas` (`ID`);
 
 --
 -- Filtros para la tabla `canciones`
