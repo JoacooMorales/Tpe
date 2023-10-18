@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-10-2023 a las 05:44:41
+-- Tiempo de generación: 18-10-2023 a las 04:56:47
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 7.3.27
 
@@ -40,7 +40,8 @@ CREATE TABLE `albumes` (
 
 INSERT INTO `albumes` (`ID`, `tituloAlbum`, `anioLanzamiento`, `artistaID`) VALUES
 (1, 'pipo arg', 2021, 1),
-(3, 'pipo ALEMANIA', 2023, 1);
+(4, 'asdas', 22, 2),
+(5, 'pipo chile', 2323, 2);
 
 -- --------------------------------------------------------
 
@@ -81,8 +82,8 @@ CREATE TABLE `canciones` (
 --
 
 INSERT INTO `canciones` (`ID`, `titulo`, `Duración`, `albumID`) VALUES
-(4, 'holaa', '03:33:00', 3),
-(6, 'duko', '00:02:30', 1);
+(8, 'holaa', '00:02:40', 1),
+(10, 'asdasd', '00:00:22', 4);
 
 -- --------------------------------------------------------
 
@@ -93,17 +94,16 @@ INSERT INTO `canciones` (`ID`, `titulo`, `Duración`, `albumID`) VALUES
 CREATE TABLE `sesion` (
   `ID` int(40) NOT NULL,
   `username` varchar(40) NOT NULL,
-  `password` varchar(256) NOT NULL COMMENT 'No deberia verse ',
-  `Tipo` varchar(40) NOT NULL
+  `password` varchar(256) NOT NULL COMMENT 'No deberia verse '
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `sesion`
 --
 
-INSERT INTO `sesion` (`ID`, `username`, `password`, `Tipo`) VALUES
-(0, 'webadmin', '$2y$10$8EUbcp4L7og8xoeFMJ3xpuGTGni6su.pyAw3eoAdmO9VG7aH/44m.', 'admin'),
-(1, 'webusuario', '$2y$10$8EUbcp4L7og8xoeFMJ3xpuGTGni6su.pyAw3eoAdmO9VG7aH/44m.', 'usuario');
+INSERT INTO `sesion` (`ID`, `username`, `password`) VALUES
+(0, 'webadmin', '$2y$10$YncPGmtEfvrGxN7yeY4ut.sMVzUQ4Bw6IRmulCpWGoGIn4ECw9Dfu'),
+(1, 'webusuario', '$2y$10$8EUbcp4L7og8xoeFMJ3xpuGTGni6su.pyAw3eoAdmO9VG7aH/44m.');
 
 --
 -- Índices para tablas volcadas
@@ -144,7 +144,7 @@ ALTER TABLE `sesion`
 -- AUTO_INCREMENT de la tabla `albumes`
 --
 ALTER TABLE `albumes`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `artistas`
@@ -156,7 +156,7 @@ ALTER TABLE `artistas`
 -- AUTO_INCREMENT de la tabla `canciones`
 --
 ALTER TABLE `canciones`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restricciones para tablas volcadas

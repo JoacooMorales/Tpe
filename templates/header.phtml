@@ -30,13 +30,13 @@
                             <a class="nav-link" aria-current="page" href="album">Albumes</a>
                         </li>
 
-                        <?php if (!isset($_SESSION['USER_ID'])) : ?>
+                        <?php if (isset($_SESSION['USER_ID'])) : ?>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="login">Login</a>
+                            <a class="nav-link" aria-current="page" href="logout">logout(<?= $_SESSION['USER_USERNAME'] ?>)</a>
                         </li>
                         <?php else : ?>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="logout">Logout (<?= $_SESSION['USER_USERNAME'] ?>)</a>
+                            <a class="nav-link" aria-current="page" href="login">login </a>
                         </li>
                         <?php endif ?>
                     </ul>
@@ -47,3 +47,7 @@
 
     <!-- inicio main container -->
     <main class="container mt-3">
+
+
+
+    

@@ -16,15 +16,18 @@ class CancionController {
         $this->view = new CancionView();
     }
 
-    public function showCanciones() {
+    public function showCanciones($albumes=null) {
+        AuthHelper::init();
+
         // obtengo tareas del controlador
         $canciones = $this->model->getCanciones();
 
         // muestro las tareas desde la vista
-        $this->view->showCanciones($canciones);
+        $this->view->showCanciones($canciones,$albumes);
     }
 
     public function addCanciones() {
+        AuthHelper::verify();
         // Verificar si los parámetros POST requeridos existen
         if (isset($_POST['titulo'], $_POST['Duración'], $_POST['albumID'])) {
             // Obtener los datos de la solicitud POST
@@ -52,19 +55,39 @@ class CancionController {
 
 
     function removeCanciones($id) {
+        AuthHelper::verify();
         $this->model->deleteCanciones($id);
         header('Location: ' . BASE_URL);
     }
     
-    function editarCanciones() {
-        $canciones = $this->model->getCanciones();
-        $albumes = $this->albumModel->getAlbum();
+    function editarCancion($id,$albumes) {
+        AuthHelper::verify();
+        $canciones = $this->model->getCancionByID($id);
         $this->view->showPantallaEditora($canciones, $albumes);
         
-
-
-        
         //header('Location: ' . BASE_URL);
+    }
+
+
+    function mostrarCancionesPorID($id){
+        AuthHelper::init();
+        $canciones = $this->model->getCancionesByAlbum($id);
+        $this->view->showCanciones($canciones,null);
+
+    }
+
+    function actualizarCancion ($id){
+        AuthHelper::verify();
+        $titulo=$_POST ['nuevoTitulo'];
+        $album=$_POST ['nuevoAlbum'];
+        $duracion=$_POST ['nuevoDuracion'];
+        if (!empty($titulo)&& !empty($album) && !empty($duracion)) { 
+            $this->model->actualizarCancion($id,$titulo,$album,$duracion);
+            header('Location: '. BASE_URL);
+        } else {
+            $this->view->showError("Debe completar todos los campos");
+        }
+
     }
 
 }

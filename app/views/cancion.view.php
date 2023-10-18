@@ -1,7 +1,7 @@
 <?php
 
 class CancionView {
-    public function showCanciones($canciones) {
+    public function showCanciones($canciones,$albumes) {
         $count = count($canciones);
 
         // NOTA: el template va a poder acceder a todas las variables y constantes que tienen alcance en esta funcion
@@ -15,7 +15,6 @@ class CancionView {
     }
 
     public function showPantallaEditora($canciones, $albumes){
-        
         require 'templates/editar_canciones.phtml';
     }
 }

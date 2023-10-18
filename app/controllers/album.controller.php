@@ -14,49 +14,62 @@ class AlbumController {
     } 
 
     public function showAlbum() {
+        AuthHelper::init();
+        $artistas = $this->model->getArtistasForAlbumes();
         // Obtén los albumes desde el modelo
         $albumes = $this->model->getAlbum();
         // Muestra los albumes desde la vista
-        $this->view->showAlbum($albumes);
+        $this->view->showAlbum($albumes,$artistas);
     }
 
 
 
+
     public function addAlbum() {
-        // Verificar si los parámetros POST requeridos existen
-        if (isset($_POST['tituloAlbum'], $_POST['anioLanzamiento'], $_POST['artistaID'])) {
-            // Obtener los datos de la solicitud POST
-            $tituloAlbum = $_POST['tituloAlbum'];
-            $anioLanzamiento = $_POST['anioLanzamiento'];
-            $artistaID = $_POST['artistaID'];
-    
-            // Realizar validaciones adicionales si es necesario
-            if (empty($tituloAlbum) || empty($anioLanzamiento)) {
-                $this->view->showError("Debe completar todos los campos");
-                return;
-            }
-    
-            $id = $this->model->insertAlbum($tituloAlbum, $anioLanzamiento, $artistaID);
-            if ($id) {
-                header('Location: ' . BASE_URL);
-            } else {
-                $this->view->showError("Error al insertar la canción");
-            }
+        AuthHelper::verify();
+
+        // Obtén los datos del formulario
+        $tituloAlbum = $_POST['tituloAlbum'];
+        $anioLanzamiento = $_POST['anioLanzamiento'];
+        $artistaID = $_POST['artistaID'];
+
+        // Validaciones
+        if (empty($tituloAlbum) || empty($anioLanzamiento)) {
+            $this->view->showError("Debe completar todos los campos");
+            return;
+        }
+
+        $id = $this->model->insertAlbum($tituloAlbum, $anioLanzamiento, $artistaID);
+        if ($id) {
+            header('Location: ' . BASE_URL);
         } else {
-            // Manejar el caso en el que falten parámetros POST requeridos
-            $this->view->showError("Faltan parámetros POST");
+            $this->view->showError("Error al insertar el álbum");
         }
     }
 
 
     public function removeAlbum($id) {
+        AuthHelper::verify();
         $this->model->deleteAlbum($id);
         header('Location: ' . BASE_URL);
     }
     
-    public function editarAlbum($id) {
-        $this->model->updateAlbum($id);
-        header('Location: ' . BASE_URL);
+    function editarAlbum() {
+        AuthHelper::verify();
+        $albumes = $this->model->getAlbum();
+        $this->view->showPantallaEditora($albumes);
+        
+
+
+        
+        //header('Location: ' . BASE_URL);
     }
+
+    function getAlbumes(){
+        $albumes = $this->model->getAlbumes();
+        return $albumes;
+    }
+    
+
 }
 

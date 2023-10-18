@@ -33,12 +33,29 @@ class CancionModel {
 
     
 function deleteCanciones($id) {
-    $query = $this->db->prepare('DELETE FROM canciones WHERE id = ?');
+    $query = $this->db->prepare('DELETE FROM canciones WHERE ID = ?');
     $query->execute([$id]);
 }
 
-function updateCanciones($id) {    
-    $query = $this->db->prepare('UPDATE canciones SET canciones = 1 WHERE id = ?');
+function getCancionByID($id) {    
+    $query = $this->db->prepare('SELECT * FROM canciones WHERE ID =? ');
     $query->execute([$id]);
+    $cancion = $query->fetch(PDO::FETCH_OBJ);
+    return $cancion;
 }
+
+function getCancionesByAlbum($id) {    
+    $query = $this->db->prepare('SELECT * FROM canciones INNER JOIN albumes ON canciones.albumID = albumes.ID WHERE canciones.albumID =? ');
+    $query->execute([$id]);
+    $cancion = $query->fetchAll(PDO::FETCH_OBJ);
+    return $cancion;
+}
+
+
+function actualizarCancion($id, $titulo, $duracion, $albumID) {
+    $query = $this->db->prepare('UPDATE ´canciones´ SET titulo =?, Duración =?, albumID =? WHERE ID =?');
+    $query->execute([$titulo, $duracion, $albumID, $id]);
+    return $query;
+}
+
 }

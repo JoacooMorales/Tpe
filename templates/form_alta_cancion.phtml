@@ -12,8 +12,8 @@
             <div class="form-group">
                 <label>album al que pertenece</label>
                 <select required name="albumID" class="form-control">
-        <?php foreach ($canciones as $cancion): ?>
-        <option value="<?= $cancion->albumID ?>"><?= $cancion->tituloAlbum ?></option>
+        <?php foreach ($albumes as $album): ?>
+        <option value="<?= $album->ID ?>"><?= $album->tituloAlbum ?></option>
         <?php endforeach ?>
 </select>
 

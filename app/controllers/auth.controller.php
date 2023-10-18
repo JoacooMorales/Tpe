@@ -13,6 +13,7 @@ class AuthController {
     }
 
     public function showLogin() {
+        AuthHelper::init();
         $this->view->showLogin();
     }
 
@@ -36,6 +37,8 @@ class AuthController {
         }
     }
 
+
+    
     public function logout() {
         AuthHelper::logout();
         header('Location: ' . BASE_URL);

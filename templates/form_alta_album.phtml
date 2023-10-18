@@ -1,5 +1,5 @@
 <!-- formulario de alta de álbum -->
-<form action="agregar" method="POST" class="my-4">
+<form action="agregarAlbum" method="POST" class="my-4">
     <div class="row">
         <div class="col-9">
             <div class="form-group">
@@ -11,16 +11,12 @@
         <div class="col-3">
             <div class="form-group">
                 <label>Artista del álbum</label>
-                <select required name="artistaID" class="form-control">
-                    <?php
-                    foreach ($albumes as $album):
-                        $artistaID = $album->artistaID;
-                        $nombreArtista = $album->nombreArtista;
-                    ?>
-                        <option value="<?= $artistaID ?>"><?= $nombreArtista ?></option>
-                    <?php
-                    endforeach;
-                    ?>
+                <select class="form-control" name="artistaID">
+                        <?php foreach ($artistas as $artista): ?>
+                            <option value="<?= $artista->ID ?>" <?= $artista->ID == $artista->ID ? 'selected' : '' ?>>
+                                <?= $artista->nombreArtista?>
+                            </option>
+                        <?php endforeach ?>
                 </select>
             </div>
         </div>

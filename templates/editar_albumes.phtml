@@ -1,50 +1,38 @@
-<?php require 'templates/header.phtml' ?>
+<?php require 'templates/header.phtml'; ?>
+
 <div class="container-fluid w-100 d-flex justify-content-center">
     <div>
-
-        <h1> editar albumes</h1>
+        <h1>Editar Albumes</h1>
         <table class="my-4 table">
             <thead>
-
                 <tr>
-
-
-                    <th class="col">Tipo</th>
-                    <th class="col">Descripcion</th>
-                    <th class="col">Orden</th>
-                    <th class="col">Noticia</th>
-
-                    {if $isAdmin}
-                        <th class="col">BORRAR</th>
-                        <th class="col">EDITAR</th>
-                    {/if}
-
-
+                    <th class="col">Título</th>
+                    <th class="col">Año lanzamiento</th>
+                    <th class="col">Artista al que pertenece</th>
+                    <th class="col">ACTUALIZAR</th>
                 </tr>
-
             </thead>
 
-
-            {foreach from=$tablasSecciones item=item}
-                <form class="form-alta" action="editarseccion/{$item->id_seccion}" method="POST">
-                    <tr style=text-align:center>
-
-                        <td><input class="form-control" type="text" name="tipo" >{$item->tipo}</td>
-                        <td><input class="form-control" type="text" name="descripcion" >{$item->descripcion}</td>
-                        <td><input class="form-control" type="int" name="orden" >{$item->orden}</td>
-                        <td><input class="form-control" type="number" name="id_noticia">{$item->id_noticia}</td>
-                        {if $isAdmin}
-                            <td><a class="btn btn-primary" href="borrarseccion/{$item->id_seccion}">borrar</a></td>
-                            <td><button type="submit" class="btn btn-primary">editar</button></td>
-                        {/if}
+            <?php foreach ($albumes as $album): ?>
+                <form class="form-alta" action="editarAlbum/<?= $album->ID ?>" method="POST">
+                    <tr style="text-align:center">
+                        <td><input class="form-control" type="text" name="tituloAlbum" value="<?= $album->tituloAlbum ?>"></td>
+                        <td><input class="form-control" type="text" name="anioLanzamiento" value="<?= $album->anioLanzamiento ?>"></td>
+                        <td>
+                            <select class="form-control" name="artistaID">
+                                <?php foreach ($albumes as $artista): ?>
+                                    <option value="<?= $artista->ID ?>" <?= $album->artistaID == $artista->ID ? 'selected' : '' ?>>
+                                        <?= $artista->nombreArtista ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </td>
+                        <td><a href="actualizarCancion/<?= $canciones->ID ?>"  type="button" class="btn btn-warning">Actualizar</a></td>   
                     </tr>
                 </form>
-
-            {/foreach}
-
+            <?php endforeach; ?>
         </table>
-
     </div>
 </div>
-<a href="noticias" class="volver">VOLVER</a>
-{include file="templates/footer.tpl"}
+<a href=""  type="submit" class="btn btn-primary">volver</a>
+<?php require 'templates/footer.phtml'; ?>

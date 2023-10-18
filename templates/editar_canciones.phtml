@@ -9,32 +9,30 @@
                     <th class="col">Título</th>
                     <th class="col">Álbum</th>
                     <th class="col">Duración</th>
-                    <?php if ($isAdmin): ?>
-                        <th class="col">BORRAR</th>
-                    <?php endif; ?>
+                    <th class="col">ACTUALIZAR</th>
+
                 </tr>
             </thead>
 
-            <?php foreach ($canciones as $cancion): ?>
-                <form class="form-alta" action="editarCancion/<?= $cancion->id_cancion ?>" method="POST">
+                <form class="form-alta" action="actualizarCancion/<?= $canciones->ID ?>" method="POST">
                     <tr style="text-align:center">
-                        <td><input class="form-control" type="text" name="titulo" value="<?= $cancion->titulo ?>"></td>
+                        <td><input class="form-control" type="text" name="nuevoTitulo" value="<?= $canciones->titulo ?>"></td>
                         <td>
-                            <select class="form-control" name="album">
+                            <select class="form-control" name="nuevoAlbum">
                                 <?php foreach ($albumes as $album): ?>
-                                    <option value="<?= $album->id_album ?>" <?= $cancion->id_album == $album->id_album ? 'selected' : '' ?>>
-                                        <?= $album->nombre_album ?>
+                                    <option value="<?= $album->ID ?>" <?= $canciones->albumID == $album->ID ? 'selected' : '' ?>>
+                                        <?= $album->tituloAlbum ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
                         </td>
-                        <td><input class="form-control" type="text" name="duracion" value="<?= $cancion->Duración ?>"></td>
-                        <td><button type="submit" class="btn btn-primary">Editar</button></td>
+                        <td><input class="form-control" type="text" name="nuevoDuracion" value="<?= $canciones->Duración ?>"></td>
+                        <td> <button type="submit"  class="btn btn-warning">Actualizar </button> </td> 
+                                 
                     </tr>
                 </form>
-            <?php endforeach; ?>
         </table>
     </div>
 </div>
-<a href="" class="volver">VOLVER</a>
+<a href=""  type="submit" class="btn btn-primary">volver</a>
 <?php require 'templates/footer.phtml'; ?>

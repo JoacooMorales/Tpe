@@ -18,13 +18,20 @@
         
             return $albumes;
         }
+
+        function getAlbumes(){
+            $query = $this->db->prepare('SELECT * FROM albumes');
+            $query->execute();
+            $albumes = $query->fetchAll(PDO::FETCH_OBJ);
+            return $albumes;
+        }
         
 
         /**
          * Inserta el album en la base de datos
          */
         function insertAlbum($tituloAlbum, $anioLanzamiento, $artistaID) {
-            $query = $this->db->prepare('INSERT INTO albumes (Título del Álbum , Año de Lanzamiento, Artista ID) VALUES(?,?,?)');
+            $query = $this->db->prepare('INSERT INTO albumes (tituloAlbum , AnioLanzamiento, artistaID) VALUES(?,?,?)');
             $query->execute([$tituloAlbum, $anioLanzamiento, $artistaID]);
 
             return $this->db->lastInsertId();
@@ -32,12 +39,19 @@
 
         
     function deleteAlbum($id) {
-        $query = $this->db->prepare('DELETE FROM albumes WHERE id = ?');
+        $query = $this->db->prepare('DELETE FROM albumes WHERE ID = ?');
         $query->execute([$id]);
     }
 
-    function updateAlbum($id) {    
-        $query = $this->db->prepare('UPDATE albumes SET albumes = 1 WHERE id = ?');
+    function editarAlbum($id) {    
+        $query = $this->db->prepare('UPDATE albumes SET albumes = 1 WHERE ID = ?');
         $query->execute([$id]);
+    }
+
+    function getArtistasForAlbumes(){
+        $query = $this->db->prepare('SELECT *, artistas.`Nombre del Artista` AS nombreArtista  FROM artistas');
+        $query->execute();
+        $artistas = $query->fetchAll(PDO::FETCH_OBJ);
+        return $artistas;
     }
     }

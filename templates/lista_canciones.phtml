@@ -1,6 +1,9 @@
 <?php require 'templates/header.phtml' ?>
 
-<?php require 'templates/form_alta_cancion.phtml' ?>
+<?php if (isset($_SESSION['USER_ID'])) : ?>
+
+    <?php require 'templates/form_alta_cancion.phtml' ?>
+<?php endif ?>
 
 <ul class="list-group">
 <?php foreach ($canciones as $cancion): ?>
@@ -9,8 +12,10 @@
              <b>Titulo: <?= $cancion->titulo ?></b> | Duración: <?= $cancion->Duración ?> | Álbum al que pertenece: <?= $cancion->tituloAlbum ?>
         </div>
         <div class="actions">
+        <?php if (isset($_SESSION['USER_ID'])) : ?>
             <a href="eliminar/<?= $cancion->ID ?>" type="button" class="btn btn-danger">Borrar</a>
-            <a href="editarCanciones" <?= $cancion->ID ?> type="button" class="btn btn-warning">Editar</a>    
+            <a href="editarCancion/<?= $cancion->ID ?>"  type="button" class="btn btn-warning">Editar</a>
+            <?php endif ?>   
         </div>
     </li>
 <?php endforeach ?>

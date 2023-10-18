@@ -2,7 +2,7 @@
 
 
 class AlbumView {
-    public function showAlbum($Albumes) {
+    public function showAlbum($Albumes,$artistas) {
         $count = count($Albumes);
 
         // mostrar el template
@@ -11,5 +11,9 @@ class AlbumView {
 
     public function showError($error) {
         require 'templates/error.phtml';
+    }
+    public function showPantallaEditora($albumes){
+        
+        require 'templates/editar_albumes.phtml';
     }
 }
